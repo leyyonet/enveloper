@@ -2,7 +2,7 @@
 Error enveloper in order to use the necessity to a try...catch block.
 
 ## Import
-- `npm i @leyyo/error-enveloper`
+- `npm i @leyyo/enveloper`
 
 ## Standards
 - Language: `TS`
