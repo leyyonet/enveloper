@@ -1,6 +1,6 @@
 import {KEY_ERROR_EMIT, KEY_ERROR_I18N, LeyyoError} from "@leyyo/common";
 
-export class ErrorEnveloperError extends LeyyoError {
+export class EnveloperError extends LeyyoError {
 
     /**
      * @param {string} method

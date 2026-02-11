@@ -6,8 +6,8 @@ import {
     OnOtherAnyFun, OnOtherFun
 } from "./index.types";
 import {Either} from "@leyyo/either";
-import {ErrorEnveloperError} from "./error-enveloper.error";
-import {enveloperDefaultConfig} from "./enveloper.config";
+import {EnveloperError} from "./enveloper.error";
+import {enveloperConfig} from "./enveloper.config";
 import {
     Async,
     ClassLike,
@@ -32,7 +32,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
         else {
             name = '#' + name;
         }
-        this._config = enveloperDefaultConfig.all;
+        this._config = enveloperConfig.all;
         this.logger = logCommon.of('ErrorEnveloper' + name);
     }
     protected logIt(method: string, e: Error, log: boolean): void {
@@ -52,7 +52,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
 
     /** @inheritDoc */
     clearConfig(): ErrorEnveloperLike {
-        this._config = enveloperDefaultConfig.all;
+        this._config = enveloperConfig.all;
         return this;
     }
 
@@ -81,7 +81,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
     /** {@inheritDoc} */
     swallow<T>(callback: Fnc<T>, def?: T, log?: boolean): T {
         if (typeof callback !== 'function') {
-            throw new ErrorEnveloperError('swallow', 'callback');
+            throw new EnveloperError('swallow', 'callback');
         }
         try {
             return callback();
@@ -96,7 +96,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
     /** {@inheritDoc} */
     async swallowAsync<T>(callback: Async<T>, def?: T, log?: boolean): Promise<T> {
         if (typeof callback !== 'function') {
-            throw new ErrorEnveloperError('swallowAsync', 'callback', true);
+            throw new EnveloperError('swallowAsync', 'callback', true);
         }
         try {
             return await callback();
@@ -113,10 +113,10 @@ class ErrorEnveloper implements ErrorEnveloperLike {
     /** @inheritDoc */
     handle<T>(callback: Fnc<T>, onError: OnErrorFun<T>, def?: T, log?: boolean): T {
         if (typeof callback !== 'function') {
-            throw new ErrorEnveloperError('handle', 'callback');
+            throw new EnveloperError('handle', 'callback');
         }
         if (typeof onError !== 'function') {
-            throw new ErrorEnveloperError('handle', 'onError');
+            throw new EnveloperError('handle', 'onError');
         }
         try {
             return callback();
@@ -131,10 +131,10 @@ class ErrorEnveloper implements ErrorEnveloperLike {
     /** @inheritDoc */
     async handleAsync<T>(callback: Async<T>, onError: OnErrorAnyFun<T>, def?: T, log?: boolean): Promise<T> {
         if (typeof callback !== 'function') {
-            throw new ErrorEnveloperError('handleAsync', 'callback');
+            throw new EnveloperError('handleAsync', 'callback');
         }
         if (typeof onError !== 'function') {
-            throw new ErrorEnveloperError('handleAsync', 'onError');
+            throw new EnveloperError('handleAsync', 'onError');
         }
         try {
             return await callback();

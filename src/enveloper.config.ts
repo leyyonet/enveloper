@@ -10,7 +10,7 @@ import {Builder, BuilderAny} from "@leyyo/builder";
 import {ClassLike, DeveloperError, isClass, testCase} from "@leyyo/common";
 import {FQN, KEY_ENVELOPER_CONFIG} from "./internal";
 
-export class EnveloperConfig implements EnveloperConfigLike {
+class EnveloperConfig implements EnveloperConfigLike {
     private _knownList: Set<ClassLike> = new Set();
     private _ignoredList: Set<ClassLike> = new Set();
     ignored: ClassLike;
@@ -87,4 +87,4 @@ export class EnveloperConfig implements EnveloperConfigLike {
     }
 }
 
-export const enveloperDefaultConfig: EnveloperConfigLike = new EnveloperConfig();
+export const enveloperConfig: EnveloperConfigLike = new EnveloperConfig();
