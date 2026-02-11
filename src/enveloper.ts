@@ -1,24 +1,18 @@
 import {
     DummyAsyncFun,
-    DummyFun, EnveloperConfigExport, EnveloperConfigLike,
+    DummyFun,
+    EnveloperConfigExport,
+    EnveloperConfigLike,
     ErrorEnveloperLike,
-    OnErrorAnyFun, OnErrorFun,
-    OnOtherAnyFun, OnOtherFun
+    OnErrorAnyFun,
+    OnErrorFun,
+    OnOtherAnyFun,
+    OnOtherFun
 } from "./index.types";
 import {Either} from "@leyyo/either";
 import {EnveloperError} from "./enveloper.error";
 import {enveloperConfig} from "./enveloper.config";
-import {
-    Async,
-    ClassLike,
-    DeveloperError,
-    Fnc,
-    isFilledObj,
-    isText,
-    logCommon,
-    Logger,
-    testCase
-} from "@leyyo/common";
+import {Async, ClassLike, DeveloperError, Fnc, isFilledObj, isText, logCommon, Logger, testCase} from "@leyyo/common";
 import {FQN, KEY_ENVELOPER_CONFIG} from "./internal";
 
 class ErrorEnveloper implements ErrorEnveloperLike {
@@ -26,7 +20,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
     private logger: Logger;
 
     constructor(name?: string) {
-        if (!isText(name)) {
+        if ( !isText(name)) {
             name = '';
         }
         else {
@@ -35,6 +29,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
         this._config = enveloperConfig.all;
         this.logger = logCommon.of('ErrorEnveloper' + name);
     }
+
     protected logIt(method: string, e: Error, log: boolean): void {
         if (log ?? this._config.log) {
             this.logger.error(e, {method});
@@ -63,10 +58,10 @@ class ErrorEnveloper implements ErrorEnveloperLike {
 
     /** @inheritDoc */
     attachConfig(config: EnveloperConfigLike): ErrorEnveloperLike {
-        if (!isFilledObj(config)) {
+        if ( !isFilledObj(config)) {
             throw new DeveloperError('Invalid config', testCase(FQN, 100), 'ErrorEnveloper');
         }
-        if (!isFilledObj(config.all)) {
+        if ( !isFilledObj(config.all)) {
             throw new DeveloperError('Invalid config', testCase(FQN, 101), 'ErrorEnveloper');
         }
         if (config.all[KEY_ENVELOPER_CONFIG] !== KEY_ENVELOPER_CONFIG) {
@@ -86,7 +81,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
         try {
             return callback();
         } catch (e) {
-            if (!this._inErrorList(e, this._config.ignoredList)) {
+            if ( !this._inErrorList(e, this._config.ignoredList)) {
                 this.logIt('swallow', e, log);
             }
             return def;
@@ -101,12 +96,13 @@ class ErrorEnveloper implements ErrorEnveloperLike {
         try {
             return await callback();
         } catch (e) {
-            if (!this._inErrorList(e, this._config.ignoredList)) {
+            if ( !this._inErrorList(e, this._config.ignoredList)) {
                 this.logIt('swallowAsync', e, log);
             }
             return def;
         }
     }
+
     // endregion swallow
 
     // region handle
@@ -121,7 +117,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
         try {
             return callback();
         } catch (e) {
-            if (!this._inErrorList(e, this._config.ignoredList)) {
+            if ( !this._inErrorList(e, this._config.ignoredList)) {
                 this.logIt('handle', e, log);
             }
             return this.swallow(() => onError(e), def, log);
@@ -139,12 +135,13 @@ class ErrorEnveloper implements ErrorEnveloperLike {
         try {
             return await callback();
         } catch (e) {
-            if (!this._inErrorList(e, this._config.ignoredList)) {
+            if ( !this._inErrorList(e, this._config.ignoredList)) {
                 this.logIt('handleAsync', e, log);
             }
             return this.swallowAsync((async () => onError(e)) as Async<T>, def, log);
         }
     }
+
     // endregion handle
 
     // region ignore
@@ -153,21 +150,23 @@ class ErrorEnveloper implements ErrorEnveloperLike {
         try {
             callback();
         } catch (e) {
-            if (!this._inErrorList(e, this._config.ignoredList)) {
+            if ( !this._inErrorList(e, this._config.ignoredList)) {
                 this.logIt('ignore', e, log);
             }
         }
     }
+
     /** @inheritDoc */
     async ignoreAsync(callback: DummyAsyncFun, log?: boolean): Promise<void> {
         try {
             await callback();
         } catch (e) {
-            if (!this._inErrorList(e, this._config.ignoredList)) {
+            if ( !this._inErrorList(e, this._config.ignoredList)) {
                 this.logIt('ignoreAsync', e, log);
             }
         }
     }
+
     // endregion ignore
 
 
@@ -207,6 +206,7 @@ class ErrorEnveloper implements ErrorEnveloperLike {
             throw await this._config.onOtherAsync(e);
         }
     }
+
     // endregion propagate
 
     // region either
@@ -227,8 +227,10 @@ class ErrorEnveloper implements ErrorEnveloperLike {
             return Either.second(e) as Either<T, E>;
         }
     }
+
     // endregion either
 }
-export const errorEnveloper:ErrorEnveloperLike = new ErrorEnveloper();
+
+export const errorEnveloper: ErrorEnveloperLike = new ErrorEnveloper();
 // noinspection JSUnusedGlobalSymbols
 export const enveloper = errorEnveloper; // just alias

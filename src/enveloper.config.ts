@@ -35,13 +35,13 @@ class EnveloperConfig implements EnveloperConfigLike {
                         this.log = v;
                         break;
                     case "ignored":
-                        if (!isClass(v)) {
+                        if ( !isClass(v)) {
                             throw new DeveloperError('Invalid class', testCase(FQN, 100));
                         }
                         this._ignoredList.add(v as ClassLike);
                         break;
                     case "known":
-                        if (!isClass(v)) {
+                        if ( !isClass(v)) {
                             throw new DeveloperError('Invalid class', testCase(FQN, 100));
                         }
                         this._knownList.add(v as ClassLike);

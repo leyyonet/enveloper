@@ -22,10 +22,13 @@ export interface EnveloperConfigLike {
     onOtherAsync: OnOtherAnyFun;
 
     builder(): BuilderAny<EnveloperConfigBuilder>;
+
     fork(copyExisting?: boolean): EnveloperConfigLike;
+
     get all(): EnveloperConfigExport;
 }
-export type EnveloperConfigBuilder = Omit<EnveloperConfigLike, 'builder'|'all'|'fork'>;
+
+export type EnveloperConfigBuilder = Omit<EnveloperConfigLike, 'builder' | 'all' | 'fork'>;
 
 export interface EnveloperConfigExport {
     log: boolean;
@@ -58,7 +61,7 @@ export interface ErrorEnveloperLike {
     // region swallow
     /**
      * Swallows an error condition for sync callback
-     * 
+     *
      * @param {function} callback - callback
      *
      * @returns {any} - response of `callback` if `callback` runs
@@ -121,6 +124,7 @@ export interface ErrorEnveloperLike {
      * @returns {any} - `default` if `callback` fails
      * */
     swallowAsync<T>(callback: Async<T>, def: T, log: boolean): Promise<T>;
+
     // endregion swallow
 
 
@@ -169,7 +173,7 @@ export interface ErrorEnveloperLike {
      *
      * @param {function} callback - callback
      * @param {function} onError - on error callback
-     * 
+     *
      * @returns {any} - response of `callback` if `callback` runs
      * @returns {any} - response of `onError` if `callback` fails and `onError` runs
      * @returns {undefined} - if `callback` and `onError` fail
@@ -182,7 +186,7 @@ export interface ErrorEnveloperLike {
      * @param {function} callback - callback
      * @param {function} onError - on error callback
      * @param {any} def - default value when error occurred
-     * 
+     *
      * @returns {any} - response of `callback` if `callback` runs
      * @returns {any} - response of `onError` if `callback` fails and `onError` runs
      * @returns {any} - `default` if `callback` and `onError` fail
@@ -196,12 +200,13 @@ export interface ErrorEnveloperLike {
      * @param {function} onError - on error callback
      * @param {any} def - default value when error occurred
      * @param {boolean} log - prints error message
-     * 
+     *
      * @returns {any} - response of `callback` if `callback` runs
      * @returns {any} - response of `onError` if `callback` fails and `onError` runs
      * @returns {any} - `default` if `callback` and `onError` fail
      * */
     handleAsync<T>(callback: Async<T>, onError: OnErrorAnyFun<T>, def: T, log: boolean): Promise<T>;
+
     // endregion handle
 
     // region ignore
@@ -246,6 +251,7 @@ export interface ErrorEnveloperLike {
      * @returns {undefined} - if `callback` fails
      * */
     ignoreAsync(callback: DummyAsyncFun, log: boolean): Promise<void>;
+
     // endregion ignore
 
 
@@ -254,7 +260,7 @@ export interface ErrorEnveloperLike {
      * Propagates an error condition for sync callback
      *
      * @param {function} callback - callback
-     * 
+     *
      * @returns {any} - response of `callback` if `callback` runs
      * @returns {undefined} - if error is in ignored errors, it will be ignored
      * @throws {Error} - else if error is in known errors, it will be thrown
@@ -327,6 +333,7 @@ export interface ErrorEnveloperLike {
      * @throws {Error} - else, response of `onOther` will be thrown
      * */
     propagateAsync<T>(callback: Async<T>, onOther: OnOtherAnyFun, def: T): Promise<T>;
+
     // endregion propagate
 
     // region either
@@ -350,6 +357,7 @@ export interface ErrorEnveloperLike {
      * @returns {Either} - {isSecond: true, second: Error}, if `callback` fails
      * */
     eitherAsync<T, E extends Error>(callback: Async<T>): Promise<Either<T, E>>;
+
     // endregion either
 
 

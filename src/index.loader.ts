@@ -1,9 +1,8 @@
 import {FQN} from "./internal";
 import {defineLoader, loader_leyyoCommon} from "@leyyo/common";
-import {enveloperConfig} from "./enveloper.config";
 
 // noinspection JSUnusedGlobalSymbols
-export const loader_leyyoAsl = defineLoader(FQN,
+export const loader_leyyoEnveloper = defineLoader(FQN,
     // dependencies
     ...loader_leyyoCommon,
 
