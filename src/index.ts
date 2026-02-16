@@ -1,7 +1,7 @@
-export * from './index.types';
-export * from './enveloper.config';
-export * from './enveloper.error';
-export * from './enveloper';
+export * from './index.types.js';
+export * from './enveloper.config.js';
+export * from './enveloper.error.js';
+export * from './enveloper.js';
 
-export * from './index.foretell';
-export * from './index.loader';
+export * from './index.foretell.js';
+export * from './index.loader.js';

@@ -8,12 +8,12 @@ import {
     OnErrorFun,
     OnOtherAnyFun,
     OnOtherFun
-} from "./index.types";
+} from "./index.types.js";
 import {Either} from "@leyyo/either";
-import {EnveloperError} from "./enveloper.error";
-import {enveloperConfig} from "./enveloper.config";
+import {EnveloperError} from "./enveloper.error.js";
+import {enveloperConfig} from "./enveloper.config.js";
 import {Async, ClassLike, DeveloperError, Fnc, isFilledObj, isText, logCommon, Logger, testCase} from "@leyyo/common";
-import {FQN, KEY_ENVELOPER_CONFIG} from "./internal";
+import {FQN, KEY_ENVELOPER_CONFIG} from "./internal.js";
 
 class ErrorEnveloper implements ErrorEnveloperLike {
     private _config: EnveloperConfigExport;

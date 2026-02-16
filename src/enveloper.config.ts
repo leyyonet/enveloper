@@ -5,10 +5,10 @@ import {
     OnOtherAnyFun,
     OnOtherAsyncFun,
     OnOtherFn
-} from "./index.types";
+} from "./index.types.js";
 import {Builder, BuilderAny} from "@leyyo/builder";
 import {ClassLike, DeveloperError, isClass, testCase} from "@leyyo/common";
-import {FQN, KEY_ENVELOPER_CONFIG} from "./internal";
+import {FQN, KEY_ENVELOPER_CONFIG} from "./internal.js";
 
 class EnveloperConfig implements EnveloperConfigLike {
     private _knownList: Set<ClassLike> = new Set();
