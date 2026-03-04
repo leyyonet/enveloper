@@ -1,10 +1,9 @@
 import { assert, beforeAll, describe, it } from "vitest";
-import { CausedError } from "@leyyo/common";
+import { CausedError, initTest } from "@leyyo/common";
 
-beforeAll(() => {
-  global.leyyo_testing = true;
-});
-describe("http", () => {
+beforeAll(() => initTest());
+
+describe("enveloper", () => {
   it("not symbol", () => {
     assert.throws(() => {
       throw new CausedError("invalid");

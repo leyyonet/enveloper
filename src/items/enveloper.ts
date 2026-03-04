@@ -8,9 +8,9 @@ import {
   OnErrorFun,
   OnOtherAnyFun,
   OnOtherFun,
-} from "./index.types.js";
+} from "../type.js";
 import { Either } from "@leyyo/either";
-import { EnveloperError } from "./enveloper.error.js";
+import { EnveloperError } from "../error/index.js";
 import { enveloperConfig } from "./enveloper.config.js";
 import {
   Async,
@@ -22,7 +22,7 @@ import {
   setFqn,
   testCase,
 } from "@leyyo/common";
-import { FQN, KEY_ENVELOPER_CONFIG } from "./internal.js";
+import { KEY_ENVELOPER_CONFIG, PCK } from "../internal.js";
 
 class Enveloper implements EnveloperLike {
   private _config: EnveloperConfigExport;
@@ -60,13 +60,13 @@ class Enveloper implements EnveloperLike {
   /** @inheritDoc */
   attachConfig(config: EnveloperConfigLike): EnveloperLike {
     if (!isFilledObj(config)) {
-      throw new DeveloperError("Invalid config", testCase(FQN, 100), "ErrorEnveloper");
+      throw new DeveloperError("Invalid config", testCase(PCK, 100), "ErrorEnveloper");
     }
     if (!isFilledObj(config.all)) {
-      throw new DeveloperError("Invalid config", testCase(FQN, 101), "ErrorEnveloper");
+      throw new DeveloperError("Invalid config", testCase(PCK, 101), "ErrorEnveloper");
     }
     if (config.all[KEY_ENVELOPER_CONFIG] !== KEY_ENVELOPER_CONFIG) {
-      throw new DeveloperError("Invalid config", testCase(FQN, 102), "ErrorEnveloper");
+      throw new DeveloperError("Invalid config", testCase(PCK, 102), "ErrorEnveloper");
     }
     this._config = config.all;
     return this;
@@ -236,7 +236,7 @@ class Enveloper implements EnveloperLike {
   // endregion either
 }
 
-setFqn(Enveloper, FQN);
+setFqn(Enveloper, PCK);
 const _logger = logCommon.of(Enveloper);
 
 export const enveloper: EnveloperLike = new Enveloper();

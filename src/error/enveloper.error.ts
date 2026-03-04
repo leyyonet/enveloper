@@ -1,4 +1,11 @@
-import { KEY_ERROR_EMIT, KEY_ERROR_I18N, LeyyoError } from "@leyyo/common";
+import {
+  KEY_ERROR_DEFAULT_MESSAGE,
+  KEY_ERROR_EMIT,
+  KEY_ERROR_I18N,
+  KEY_FQN_PACKAGE,
+  LeyyoError,
+} from "@leyyo/common";
+import { PCK } from "../internal.js";
 
 export class EnveloperError extends LeyyoError {
   /**
@@ -12,7 +19,9 @@ export class EnveloperError extends LeyyoError {
   }
 
   static {
-    this[KEY_ERROR_I18N] = true;
+    this[KEY_FQN_PACKAGE] = PCK;
+    this[KEY_ERROR_DEFAULT_MESSAGE] = "Enveloper error";
     this[KEY_ERROR_EMIT] = true;
+    this[KEY_ERROR_I18N] = true;
   }
 }

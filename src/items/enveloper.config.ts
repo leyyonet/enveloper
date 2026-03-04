@@ -5,10 +5,10 @@ import {
   OnOtherAnyFun,
   OnOtherAsyncFun,
   OnOtherFn,
-} from "./index.types.js";
+} from "../type.js";
 import { Builder, BuilderAny } from "@leyyo/builder";
 import { ClassLike, DeveloperError, isClass, setFqn, testCase } from "@leyyo/common";
-import { FQN, KEY_ENVELOPER_CONFIG } from "./internal.js";
+import { KEY_ENVELOPER_CONFIG, PCK } from "../internal.js";
 
 class EnveloperConfig implements EnveloperConfigLike {
   private _knownList: Set<ClassLike> = new Set();
@@ -29,31 +29,31 @@ class EnveloperConfig implements EnveloperConfigLike {
       switch (k) {
         case "log":
           if (typeof v !== "boolean") {
-            throw new DeveloperError("Invalid boolean", testCase(FQN, 100));
+            throw new DeveloperError("Invalid boolean", testCase(PCK, 100));
           }
           this.log = v;
           break;
         case "ignored":
           if (!isClass(v)) {
-            throw new DeveloperError("Invalid class", testCase(FQN, 100));
+            throw new DeveloperError("Invalid class", testCase(PCK, 100));
           }
           this._ignoredList.add(v as ClassLike);
           break;
         case "known":
           if (!isClass(v)) {
-            throw new DeveloperError("Invalid class", testCase(FQN, 100));
+            throw new DeveloperError("Invalid class", testCase(PCK, 100));
           }
           this._knownList.add(v as ClassLike);
           break;
         case "onOther":
           if (typeof v !== "function" || isClass(v)) {
-            throw new DeveloperError("Invalid function", testCase(FQN, 100));
+            throw new DeveloperError("Invalid function", testCase(PCK, 100));
           }
           this.onOther = v as OnOtherFn;
           break;
         case "onOtherAsync":
           if (typeof v !== "function" || isClass(v)) {
-            throw new DeveloperError("Invalid function", testCase(FQN, 100));
+            throw new DeveloperError("Invalid function", testCase(PCK, 100));
           }
           this.onOtherAsync = v as OnOtherAsyncFun;
           break;
@@ -85,6 +85,6 @@ class EnveloperConfig implements EnveloperConfigLike {
     return rec;
   }
 }
-setFqn(EnveloperConfig, FQN);
+setFqn(EnveloperConfig, PCK);
 
 export const enveloperConfig: EnveloperConfigLike = new EnveloperConfig();
