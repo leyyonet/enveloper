@@ -5,7 +5,7 @@
   "fixed2": ["@leyyo/builder", "@leyyo/common", "@leyyo/either"],
   "linked": [],
   "access": "restricted",
-  "baseBranch": "main",
+  "baseBranch": "development",
   "updateInternalDependencies": "patch",
   "ignore": []
 }
