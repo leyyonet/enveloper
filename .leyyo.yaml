@@ -1,2 +1,6 @@
-leyyo.enveloper:
-  test: true
+ignore: true
+rules:
+  - none
+config:
+  leyyo.enveloper:
+    foo: bar
