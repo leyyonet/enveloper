@@ -1,6 +1,6 @@
 {
     "name": "@leyyo/enveloper",
-    "version": "4.0.5",
+    "version": "4.0.6",
     "description": "Error enveloper",
     "keywords": [
         "error propagate",
@@ -62,8 +62,8 @@
         "eslint-plugin-unused-imports": "^4.4.1"
     },
     "dependencies": {
-        "@leyyo/builder": "4.0.5",
-        "@leyyo/common": "4.0.7",
-        "@leyyo/either": "4.0.5"
+        "@leyyo/builder": "4.0.6",
+        "@leyyo/common": "4.0.8",
+        "@leyyo/either": "4.0.6"
     }
 }
